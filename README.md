@@ -11,17 +11,19 @@
 Using this transaction code via the ADB shell Binder interface forces the Kernel Governor directly into a low-power/battery-saver state without altering the actual system battery percentage.
 # ​⚙️ How to Use (ADB / LADB)
 ​Enable Wireless Debugging (via LADB) or connect your device to a PC via ADB, then execute the following commands:
-# ​1. Enable Underclocking Mode
+1. Enable Underclocking Mode
 service call power 7 i32 2
-# 2. Disable Underclocking (Return to Normal)
+2. Disable Underclocking (Return to Normal)
+service call power 7 i32 0
+
 # 📊 Verification & Results
 ​After applying the command (service call power 7 i32 2), you can verify the capped frequencies via shell:
 CPU Max Frequency:
 cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-# Output: 1555200 (Capped at 1.55 GHz)
+ Output: 1555200 (Capped at 1.55 GHz)
 GPU Max Frequency:
 cat /sys/class/kgsl/kgsl-3d0/max_gpuclk
-# Output: 443000000 (Capped at 443 MHz)
+ Output: 443000000 (Capped at 443 MHz)
 # 📱 Test Environment
 ​Tested and verified on the following hardware and software configuration:
 ​Device: Samsung Galaxy S21 FE 5G (SM-G990B2)
